@@ -22,28 +22,32 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-	
+
 	@NotBlank(message = "O nome do produto é obrigatório.")
 	private String nome;
-	
+
 	@NotBlank(message = "A descrição do produto é obrigatória.")
 	@Size(max = 100, message = "A descrição deve ter no máximo 1000 caracteres.")
 	private String descricao;
-	
+
 	@Digits(integer= 8, fraction= 2)
 	@NotNull(message = "O preço do produto é obrigatorio.")
 	private BigDecimal preco;
-	
+
 	@NotNull(message = "A quantidade é obrigatória no cadastro.")
 	private Integer quantidade;
-	
+
 	@NotBlank(message = "O produto deve conter uma imagem ilustrativa.")
 	private String foto;
-	
+
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Categoria categoria;
-	
+
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Usuario usuario;
+
 
 	public Long getId() {
 		return Id;
@@ -100,7 +104,15 @@ public class Produto {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
-	
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+
 }
